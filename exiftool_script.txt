@@ -1,0 +1,6 @@
+export meta data:
+exiftool.exe -charset IPTC=UTF8 -j -w! txt .\SIN2018112000665128207055475L.jpg
+change meta data:
+exiftool -charset IPTC=UTF8 -iptc:Caption-Abstract=test -iptc:ObjectName=test .\SIN2018112000665128207055475L.jpg
+IPTC metat tag ref:
+https://sno.phy.queensu.ca/~phil/exiftool/TagNames/IPTC.html
