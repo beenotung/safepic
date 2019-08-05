@@ -9,12 +9,69 @@
 		<meta name="msapplication-tap-highlight" content="no">
 	</head>
 <body>
+	<noscript>
+		<em style="color: red;">Javascript is require for this webapp to work</em>
+	</noscript>
+	<p>
+		安全圖 (ANTI-ITPC)
+		是一個離線工具
+		。
+	</p>
+	<p>
+		用以
+		去除相片資訊，保護上傳人匿名性
+		。
+	</p>
+	<p>
+		所有數據均<strong>不會</strong>被我們儲存
+		。
+	</p>
+	<p>
+	<em>
+		您需要自擔風險使用它
+		。
+		Use it at your own risk.
+	</em>
+	</p>
 
-	<label for="imageLoader">Image Files:</label><br/>
+	<label for="imageLoader" style="font-weight: bold">
+		選擇照片
+		(Select Photos)
+		:
+	</label><br/>
 	<input type="file" id="imageLoader" multiple onchange="handleInput()"/>
 	<button type="button" onclick="handleInput()">下載</button>
 	<br>
 	<br>
+
+	<div id="output"></div>
+
+	<div id="license">
+		<h2>授權條款 (BSD-3-Clause)</h2>
+		<pre style="white-space: pre-wrap">
+* Copyright (c) 2019 著作權由__所有。著作權人保留一切權利。
+*
+* 這份授權條款，在使用者符合以下三條件的情形下，授予使用者使用及再散播本
+* 套裝軟體裝原始碼及二進位可執行形式的權利，無論此包裝是否經改作皆然：
+*
+* * 對於本軟體原始程式碼的再散播，必須保留上述的版權宣告、此三條件表列，以
+*   及下述的免責聲明。
+* * 對於本套件二進位可執行形式的再散播，必須連帶以檔以及／或者其他附
+*   於散播包裝中的媒介方式，重制上述之版權宣告、此三條件表列，以及下述
+*   的免責聲明。
+* * 未獲事前取得書面許可，不得使用柏克萊加州大學或本軟體貢獻者之名稱，
+*   來為本軟體之衍生物做任何表示支持、認可或推廣、促銷之行為。
+*
+* 免責聲明：本軟體是由版权所有者及本軟體之貢獻者以現狀（"as is"）提供，
+* 本套裝軟體裝不負任何明示或默示之擔保責任，包括但不限於就適售性以及特定目
+* 的的適用性為默示性擔保。加州大學董事會及本軟體之貢獻者，無論任何條件、
+* 無論成因或任何責任主義、無論此責任為因合約關係、無過失責任主義或因非違
+* 約之侵權（包括過失或其他原因等）而起，對於任何因使用本套裝軟體裝所產生的
+* 任何直接性、間接性、偶發性、特殊性、懲罰性或任何結果的損害（包括但不限
+* 於替代商品或勞務之購用、使用損失、資料損失、利益損失、業務中斷等等），
+* 不負任何責任，即在該種使用已獲事前告知可能會造成此類損害的情形下亦然。
+		</pre>
+	</div>
 
 
 	<script>
