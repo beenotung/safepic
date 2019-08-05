@@ -11,13 +11,6 @@
 		<!-- PWA config -->
 		<link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
 		<link rel="manifest" href="manifest.json">
-		<script>
-			if ('serviceWorker' in navigator) {
-				navigator.serviceWorker.register('service-worker.js')
-					.then(() => console.log('service worker installed'))
-					.catch(err => console.error('Error', err));
-			}
-		</script>
 		<!-- add to homescreen for ios -->
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -74,8 +67,8 @@
 
 	<div id="core" style="outline: 1px red solid">
 	<label for="imageLoader" style="font-weight: bold">
-		選擇照片
-		(Select Photos)
+		選擇照片/拍攝照片
+		(Select Photos/Take Photo)
 		:
 	</label><br/>
 	<input type="file" accept="image/*" id="imageLoader" multiple onchange="handleInput()"/>
