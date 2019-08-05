@@ -155,12 +155,10 @@
 				var img = new Image();
 				img.style.display = 'none';
 				img.onload = function(){
-					var link = document.createElement('a');
 					var canvas = document.createElement("canvas");
-					body.appendChild(link);
+					canvas.style.display = 'none';
 					body.appendChild(canvas);
 					var ctx = canvas.getContext('2d');
-					body.appendChild(img);
 
 					canvas.width = img.width;
 					canvas.height = img.height;
@@ -181,9 +179,17 @@
 						blob = dataURItoBlob(canvas.toDataURL(fType));
 						console.log('compressed size:', Math.round(blob.size/1024/1024*100)/100,'MB');
 					}
-					link.setAttribute('href', window.URL.createObjectURL(blob));
+
+					var objectURL = window.URL.createObjectURL(blob);
+
+					img = new Image();
+					img.src = objectURL;
+					body.appendChild(img);
+
+					var link = document.createElement('a');
+					body.appendChild(link);
+					link.setAttribute('href', objectURL);
 					link.click();
-					console.log('ready:', fName);
 				};
 				img.src = reader.result;
 			};
