@@ -18,20 +18,6 @@
 					.catch(err => console.error('Error', err));
 			}
 		</script>
-		<script>
-			var xhr = new XMLHttpRequest();
-			xhr.open('POST', 'index_offline.html', true);
-			xhr.responseType = 'blob';
-			xhr.onload = function (event) {
-				var blob = xhr.response;
-				window.URL.createObjectURL(blob);
-				var offline = document.getElementById('offline');
-				offline.setAttribute('href', window.URL.createObjectURL(blob));
-				console.log('done');
-			}
-			xhr.send();
-			
-		</script>
 		<!-- add to homescreen for ios -->
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -64,7 +50,20 @@
 			:
 		</label>
 		<br/>
-		<a id="offline" download="index_offline.html" >下載</a>
+		<a id="offline" download="index_offline.html">下載</a>
+		<script>
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', 'index_offline.html', true);
+			xhr.responseType = 'blob';
+			xhr.onload = function () {
+				var blob = xhr.response;
+				window.URL.createObjectURL(blob);
+				var offline = document.getElementById('offline');
+				offline.setAttribute('href', window.URL.createObjectURL(blob));
+				console.log('done');
+			};
+			xhr.send();
+		</script>
 	</div>
 	
 	
