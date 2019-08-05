@@ -11,6 +11,10 @@
 			dd {
 				margin-top: 0.5em;
 			}
+			img {
+				max-width: 100%;
+				max-height: 100%;
+			}
 		</style>
 	</head>
 <body>
@@ -24,22 +28,22 @@
         所有數據均<strong>不會</strong>被我們儲存
         。
 	</p>
-	<dl>
-		<dt>
-			主要作用
-			(Major Functions):
-		</dt>
-		<dd>
+	<h2>
+		主要功能
+		(Major Functions):
+	</h2>
+	<ul>
+		<li>
 			去除相片資訊，保護上傳人匿名性
 			<br>
 			Remove metadata in photo, to protect anonymity of uploader
-		</dd>
-		<dd>
+		</li>
+		<li>
 			將圖像壓縮到1MB以下
 			<br>
 			Compress image into below 1MB
-		</dd>
-	</dl>
+		</li>
+	</ul>
 	<p>
 	<em>
 		您需要自擔風險使用它
@@ -48,6 +52,7 @@
 	</em>
 	</p>
 
+	<div id="core" style="outline: 1px red solid">
 	<label for="imageLoader" style="font-weight: bold">
 		選擇照片
 		(Select Photos)
@@ -55,10 +60,8 @@
 	</label><br/>
 	<input type="file" id="imageLoader" multiple onchange="handleInput()"/>
 	<button type="button" onclick="handleInput()">下載</button>
-	<br>
-	<br>
-
 	<div id="output"></div>
+	</div>
 
 	<div id="license">
 		<h2>授權條款 (BSD-3-Clause)</h2>
@@ -89,21 +92,13 @@
 
 
 	<script>
+		var body = document.getElementById('output');
+		var imageLoader = document.getElementById('imageLoader');
 		function handleInput(){
-			var e;
 			var i;
 			var file;
-			var es = document.getElementsByTagName('a');
-			for (i = es.length - 1; i >= 0; i--) {
-				e = es.item(i);
-				e.parentElement.removeChild(e);
-			}
-			es = document.getElementsByTagName('canvas');
-			for (i = es.length - 1; i >= 0; i--) {
-				e = es.item(i);
-				e.parentElement.removeChild(e);
-			}
-			var files = document.getElementById('imageLoader').files;
+			body.innerHTML = '';
+			var files = imageLoader.files;
 			for (i = 0; i < files.length; i++) {
 				file = files.item(i);
 				handleImage(file)
@@ -121,9 +116,11 @@
 				img.onload = function(){
 					var link = document.createElement('a');
 					var canvas = document.createElement("canvas");
-					document.body.appendChild(link);
-					document.body.appendChild(canvas);
+					canvas.style.display = 'none';
+					body.appendChild(link);
+					body.appendChild(canvas);
 					var ctx = canvas.getContext('2d');
+					body.appendChild(img);
 
 					canvas.width = img.width;
 					canvas.height = img.height;
