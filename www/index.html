@@ -147,11 +147,9 @@
 					var targetSize = 1024 * 1024;
 					while(blob.size > targetSize){
 						var ratio = Math.sqrt(targetSize/blob.size);
-						// ratio /= 1.37; // base64 error
+						// ratio /= 1.37; // base64 factor
 						var new_width = Math.round(canvas.width * ratio);
 						var new_height = Math.round(canvas.height * ratio);
-						// console.log([img.width,img.height,img.width*img.height]);
-						// console.log([new_width,new_height,new_width*new_height]);
 						canvas.width = new_width;
 						canvas.height = new_height;
 						ctx.drawImage(img,0,0,new_width,new_height);
