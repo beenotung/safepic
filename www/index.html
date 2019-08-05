@@ -128,10 +128,10 @@
 			var reader = new FileReader();
 			reader.onload = function(){
 				var img = new Image();
+				img.style.display = 'none';
 				img.onload = function(){
 					var link = document.createElement('a');
 					var canvas = document.createElement("canvas");
-					canvas.style.display = 'none';
 					body.appendChild(link);
 					body.appendChild(canvas);
 					var ctx = canvas.getContext('2d');
@@ -139,7 +139,7 @@
 
 					canvas.width = img.width;
 					canvas.height = img.height;
-					ctx.drawImage(img,0,0);
+					ctx.drawImage(img,0,0,img.width,img.height);
 					link.setAttribute('download', fName);
 
 					var blob = dataURItoBlob(canvas.toDataURL(fType));
