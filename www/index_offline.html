@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="UTF-8">
-		<title>安全圖 (SafePic)</title>
+		<title>離線版安全圖 (SafePic)</title>
 		<meta name="viewport"
 			  content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="format-detection" content="telephone=no">
@@ -17,20 +17,6 @@
 					.then(() => console.log('service worker installed'))
 					.catch(err => console.error('Error', err));
 			}
-		</script>
-		<script>
-			var xhr = new XMLHttpRequest();
-			xhr.open('POST', 'index_offline.html', true);
-			xhr.responseType = 'blob';
-			xhr.onload = function (event) {
-				var blob = xhr.response;
-				window.URL.createObjectURL(blob);
-				var offline = document.getElementById('offline');
-				offline.setAttribute('href', window.URL.createObjectURL(blob));
-				console.log('done');
-			}
-			xhr.send();
-			
 		</script>
 		<!-- add to homescreen for ios -->
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,6 +36,9 @@
 	<noscript>
 		<em style="color: red;">Javascript is require for this webapp to work</em>
 	</noscript>
+	<h2 style="color:red;">
+		離線版
+	</h2>
 	<p>
 		安全圖 (SafePic)
 		是一個離線工具
@@ -57,15 +46,6 @@
         所有數據均<strong>不會</strong>被我們儲存
         。
 	</p>
-	<div style="outline: 1px red solid">
-		<label style="font-weight: bold">
-			離線版
-			(Offline version)
-			:
-		</label>
-		<br/>
-		<a id="offline" download="index_offline.html" >下載</a>
-	</div>
 	
 	
 	<h2>
