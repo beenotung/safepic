@@ -1,0 +1,5 @@
+= 安全圖 (ANTI-ITPC)
+
+去除相片資訊，保護上傳人匿名性
+
+Remove metadata in photo, to protect anonymity of uploader
