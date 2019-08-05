@@ -1,0 +1,85 @@
+Image: DSC_0067_clean.JPG
+  Format: JPEG (Joint Photographic Experts Group JFIF format)
+  Mime type: image/jpeg
+  Class: DirectClass
+  Geometry: 3840x2160+0+0
+  Units: Undefined
+  Colorspace: sRGB
+  Type: TrueColor
+  Base type: Undefined
+  Endianess: Undefined
+  Depth: 8-bit
+  Channel depth:
+    Red: 8-bit
+    Green: 8-bit
+    Blue: 8-bit
+  Channel statistics:
+    Pixels: 8294400
+    Red:
+      min: 0  (0)
+      max: 255 (1)
+      mean: 133.946 (0.525277)
+      standard deviation: 58.7808 (0.230513)
+      kurtosis: -0.743907
+      skewness: 0.0187754
+      entropy: 0.975189
+    Green:
+      min: 0  (0)
+      max: 255 (1)
+      mean: 72.4446 (0.284096)
+      standard deviation: 60.9798 (0.239137)
+      kurtosis: 0.0822326
+      skewness: 1.05929
+      entropy: 0.928789
+    Blue:
+      min: 0  (0)
+      max: 255 (1)
+      mean: 78.6792 (0.308546)
+      standard deviation: 68.3446 (0.268018)
+      kurtosis: 0.596199
+      skewness: 1.28086
+      entropy: 0.92807
+  Image statistics:
+    Overall:
+      min: 0  (0)
+      max: 255 (1)
+      mean: 95.0232 (0.37264)
+      standard deviation: 62.7018 (0.245889)
+      kurtosis: -0.702032
+      skewness: 0.637409
+      entropy: 0.944016
+  Rendering intent: Perceptual
+  Gamma: 0.454545
+  Chromaticity:
+    red primary: (0.64,0.33)
+    green primary: (0.3,0.6)
+    blue primary: (0.15,0.06)
+    white point: (0.3127,0.329)
+  Matte color: grey74
+  Background color: white
+  Border color: srgb(223,223,223)
+  Transparent color: none
+  Interlace: None
+  Intensity: Undefined
+  Compose: Over
+  Page geometry: 3840x2160+0+0
+  Dispose: Undefined
+  Iterations: 0
+  Compression: JPEG
+  Quality: 92
+  Orientation: Undefined
+  Properties:
+    date:create: 2019-08-05T04:36:11+00:00
+    date:modify: 2019-08-05T04:36:11+00:00
+    jpeg:colorspace: 2
+    jpeg:sampling-factor: 1x1,1x1,1x1
+    signature: ba4a848f11aa76cd35682d6c8dec11af991443c8c547bf1feedfd25011264df6
+  Artifacts:
+    verbose: true
+  Tainted: False
+  Filesize: 4.38556MiB
+  Number pixels: 8294400
+  Pixels per second: 63.758MP
+  User time: 0.130u
+  Elapsed time: 0:01.130
+  Version: ImageMagick 7.0.8-55 Q16 x86_64 2019-07-19 https://imagemagick.org
