@@ -59,7 +59,23 @@
 					ctx.drawImage(img,0,0);
 					link.setAttribute('download', fName);
 
-					link.setAttribute('href', window.URL.createObjectURL(dataURItoBlob(canvas.toDataURL(fType))));
+					var blob = dataURItoBlob(canvas.toDataURL(fType));
+					console.log('original size:', Math.round(blob.size/1024/1024*100)/100,'MB');
+					var targetSize = 1024 * 1024;
+					while(blob.size > targetSize){
+						var ratio = Math.sqrt(targetSize/blob.size);
+						// ratio /= 1.37; // base64 error
+						var new_width = Math.round(canvas.width * ratio);
+						var new_height = Math.round(canvas.height * ratio);
+						// console.log([img.width,img.height,img.width*img.height]);
+						// console.log([new_width,new_height,new_width*new_height]);
+						canvas.width = new_width;
+						canvas.height = new_height;
+						ctx.drawImage(img,0,0,new_width,new_height);
+						blob = dataURItoBlob(canvas.toDataURL(fType));
+						console.log('compressed size:', Math.round(blob.size/1024/1024*100)/100,'MB');
+					}
+					link.setAttribute('href', window.URL.createObjectURL(blob));
 					link.click();
 					console.log('ready:', fName);
 				};
