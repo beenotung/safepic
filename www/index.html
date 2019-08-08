@@ -173,6 +173,9 @@
 						// ratio /= 1.37; // base64 factor
 						var new_width = Math.round(canvas.width * ratio);
 						var new_height = Math.round(canvas.height * ratio);
+						if(new_width==canvas.width && new_height==canvas.height){
+							break;
+						}
 						canvas.width = new_width;
 						canvas.height = new_height;
 						ctx.drawImage(img,0,0,new_width,new_height);
