@@ -3,11 +3,6 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>安全圖 (SafePic)</title>
-		<script>
-			if (location.href.toLowerCase().indexOf('http://') !== -1) {
-				location.href = location.href.replace('http://','https://')
-			}
-		</script>
 		<meta name="viewport"
 			  content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="format-detection" content="telephone=no">
@@ -70,8 +65,8 @@
 			xhr.send();
 		</script>
 	</div>
-	
-	
+
+
 	<h2>
 		主要功能
 		(Major Functions):
@@ -194,7 +189,7 @@
 					img.src = objectURL;
 					body.appendChild(img);
 
-					
+
 					body.appendChild(link);
 					link.setAttribute('href', objectURL);
 					link.click();
