@@ -43,33 +43,11 @@
         所有數據均<strong>不會</strong>被我們儲存
         。
 	</p>
-	<div style="outline: 1px red solid">
-		<label style="font-weight: bold">
-			離線版
-			(Offline version)
-			:
-		</label>
-		<br/>
-		<a id="offline" download="index_offline.html">下載</a>離線版檔案
-		<script>
-			var xhr = new XMLHttpRequest();
-			xhr.open('GET', 'index_offline.html', true);
-			xhr.responseType = 'blob';
-			xhr.onload = function () {
-				var blob = xhr.response;
-				window.URL.createObjectURL(blob);
-				var offline = document.getElementById('offline');
-				offline.setAttribute('href', window.URL.createObjectURL(blob));
-				console.log('done');
-			};
-			xhr.send();
-		</script>
-	</div>
-
 
 	<h2>
 		主要功能
-		(Major Functions):
+		(Major Functions)
+		:
 	</h2>
 	<ul>
 		<li>
@@ -101,6 +79,37 @@
 	<button type="button" onclick="handleInput()">轉換</button>
 	<div id="output"></div>
 	</div>
+
+	<h2>
+		離線版
+		(Offline version)
+		:
+	</h2>
+	<div style="outline: 1px darkred solid">
+		<h3>App 版 (建議)</h3>
+		<h4>iPhone 用戶</h4>
+		Tap the Share button on the browser’s toolbar — that’s the rectangle with an arrow pointing upward. It’s on the bar at the top of the screen on an iPad, and on the bar at the bottom of the screen on an iPhone or iPod Touch. Tap the Add to Home Screen icon in the Share menu.
+		<h4>Android(安卓) 用戶</h4>
+		Tap the menu button and tap Add to homescreen
+	</div>
+	<div style="outline: 1px darkred solid">
+		<h3>HTML 檔案版 (不建議)</h3>
+		<a id="offline" download="index_offline.html">下載離線版安全圖</a>
+		<script>
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', 'index_offline.html', true);
+			xhr.responseType = 'blob';
+			xhr.onload = function () {
+				var blob = xhr.response;
+				window.URL.createObjectURL(blob);
+				var offline = document.getElementById('offline');
+				offline.setAttribute('href', window.URL.createObjectURL(blob));
+				console.log('done');
+			};
+			xhr.send();
+		</script>
+	</div>
+
 
 	<div id="license">
 		<h2>授權條款 (BSD-3-Clause)</h2>
