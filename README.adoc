@@ -12,3 +12,15 @@
 
 _您需要自擔風險使用它。_
 _Use it at your own risk._
+
+
+== License
+This project is licensed with link:./LICENSE.txt[BSD-3-Clause]
+
+
+This is free, libre, and open-source software. It comes down to four essential freedoms https://seirdy.one/2021/01/27/whatsapp-and-the-domestication-of-users.html#fnref:2[(reference)]:
+
+- The freedom to run the program as you wish, for any purpose
+- The freedom to study how the program works, and change it so it does your computing as you wish
+- The freedom to redistribute copies so you can help others
+- The freedom to distribute copies of your modified versions to others
