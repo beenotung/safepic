@@ -20,6 +20,14 @@
       li {
         margin-top: 0.5rem;
       }
+      label {
+        display: block;
+        margin-top: 0.5em;
+        font-weight: bold;
+      }
+      label::after {
+        content: ':';
+      }
     </style>
   </head>
   <body>
@@ -43,9 +51,9 @@
         Remove metadata in photo, to protect anonymity of uploader
       </li>
       <li>
-        將圖像壓縮到1MB以下
+        將圖像壓縮到<span class="targetSize">1MB</span>以下
         <br />
-        Compress image into below 1MB
+        Compress image into below <span class="targetSize">1MB</span>
       </li>
     </ul>
     <p>
@@ -53,9 +61,20 @@
     </p>
 
     <div id="core" style="outline: 1px red solid">
-      <label for="imageLoader" style="font-weight: bold">
-        選擇照片/拍攝照片 (Select Photos/Take Photo) </label
-      ><br />
+      <label for="size">大小 (Size)</label>
+      <input
+        id="size"
+        type="number"
+        step="0.1"
+        min="0.1"
+        value="1"
+        onchange="updateTargetSize()"
+      />
+      <label for="unit">單位 (Unit)</label>
+      <input id="unit" type="text" value="MB" onchange="updateTargetSize()" />
+      <label for="imageLoader"
+        >選擇照片/拍攝照片 (Select Photos/Take Photo)</label
+      >
       <input
         type="file"
         accept="image/*"
@@ -63,7 +82,10 @@
         multiple
         onchange="handleInput()"
       />
-      <button type="button" onclick="handleInput()">轉換</button>
+      <button type="button" onclick="handleInput()">轉換 (Convert)</button>
+      <button type="button" onclick="downloadAll()">
+        全部下載 (Download All)
+      </button>
       <div id="output"></div>
     </div>
 
@@ -96,26 +118,77 @@
     </div>
 
     <script>
-      var body = document.getElementById('output');
+      var KB = 1024;
+      var MB = 1024 * KB;
+      var GB = 1024 * MB;
+      function formatSize(bytes) {
+        if (bytes < KB) {
+          return [bytes, 'B'];
+        }
+        if (bytes < MB) {
+          return [(bytes / KB).toFixed(1), 'KB'];
+        }
+        if (bytes < GB) {
+          return [(bytes / MB).toFixed(1), 'MB'];
+        }
+        return [(bytes / GB).toFixed(1), 'GB'];
+      }
+
+      var sizeInput = document.getElementById('size');
+      var unitInput = document.getElementById('unit');
+      var targetSizeSpans = document.getElementsByClassName('targetSize');
+      var targetSize = MB;
+      function updateTargetSize() {
+        var bytes = sizeInput.valueAsNumber;
+        switch (unitInput.value.toUpperCase()[0]) {
+          case 'G':
+            bytes *= GB;
+            break;
+          case 'M':
+            bytes *= MB;
+            break;
+          case 'K':
+            bytes *= KB;
+            break;
+        }
+        var parts = formatSize(bytes);
+        var size = parts[0];
+        var unit = parts[1];
+        sizeInput.value = size;
+        unitInput.value = unit;
+        for (var i = 0; i < targetSizeSpans.length; i++) {
+          targetSizeSpans.item(i).textContent = parts.join('');
+        }
+        targetSize = bytes;
+      }
+      updateTargetSize();
+
+      var output = document.getElementById('output');
       var imageLoader = document.getElementById('imageLoader');
       function handleInput() {
         var i;
         var file;
-        body.innerHTML = '';
+        output.innerHTML = '';
         var files = imageLoader.files;
         for (i = 0; i < files.length; i++) {
           file = files.item(i);
           handleImage(file);
         }
       }
+      function downloadAll() {
+        var list = output.getElementsByTagName('a');
+        for (var i = 0; i < list.length; i++) {
+          list.item(i).click();
+        }
+      }
       function handleImage(file) {
         console.log(file);
-        var fNameParts = file.name.split('.')
-        var fExt = fNameParts.pop()
-        var fName = fNameParts.pop() + '_clean'
-        fNameParts.push(fName)
-        fNameParts.push(fExt)
-        fName = fNameParts.join('.')
+        var fNameParts = file.name.split('.');
+        var fExt = fNameParts.pop();
+        var fName = fNameParts.pop() + '_clean';
+        fNameParts.push(fName);
+        fNameParts.push(fExt);
+        fName = fNameParts.join('.');
         var fType = file.type;
         var reader = new FileReader();
         reader.onload = function () {
@@ -123,16 +196,13 @@
           img.style.display = 'none';
           img.onload = function () {
             var canvas = document.createElement('canvas');
-            body.appendChild(link);
-            body.appendChild(canvas);
+            canvas.style.display = 'none';
+            output.appendChild(canvas);
             var ctx = canvas.getContext('2d');
-            body.appendChild(img);
 
             canvas.width = img.width;
             canvas.height = img.height;
             ctx.drawImage(img, 0, 0, img.width, img.height);
-            var link = document.createElement('a');
-            link.setAttribute('download', fName);
 
             var blob = dataURItoBlob(canvas.toDataURL(fType));
             console.log(
@@ -140,7 +210,6 @@
               Math.round((blob.size / 1024 / 1024) * 100) / 100,
               'MB',
             );
-            var targetSize = 1024 * 1024;
             while (blob.size > targetSize) {
               var ratio = Math.sqrt(targetSize / blob.size);
               // ratio /= 1.37; // base64 factor
@@ -164,13 +233,14 @@
 
             img = new Image();
             img.src = objectURL;
-            body.appendChild(img);
 
             var link = document.createElement('a');
             link.setAttribute('download', fName);
             link.setAttribute('href', objectURL);
-            body.appendChild(link);
-            link.click();
+
+            link.appendChild(img);
+            output.appendChild(link);
+
             console.log('ready:', fName);
           };
           img.src = reader.result;
