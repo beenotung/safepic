@@ -5,12 +5,15 @@
 
 == 主要功能 (Major Functions)
 1. 去除相片資訊，保護上傳人匿名性
+   |
    Remove metadata in photo, to protect anonymity of uploader
 
-2. 將圖像壓縮到1MB以下
-   Compress image into below 1MB
+2. 將圖像壓縮到1MB以下 (或自定大小)
+   |
+   Compress image into below 1MB (or custom size)
 
 _您需要自擔風險使用它。_
+|
 _Use it at your own risk._
 
 
