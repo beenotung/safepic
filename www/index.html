@@ -182,9 +182,12 @@
       }
       function handleImage(file) {
         console.log(file);
-        var fName = file.name;
-        var fExt = fName.split('.').pop();
-        fName = fName.replace('.' + fExt, '_clean.' + fExt);
+        var fNameParts = file.name.split('.')
+        var fExt = fNameParts.pop()
+        var fName = fNameParts.pop() + '_clean'
+        fNameParts.push(fName)
+        fNameParts.push(fExt)
+        fName = fNameParts.join('.')
         var fType = file.type;
         var reader = new FileReader();
         reader.onload = function () {
