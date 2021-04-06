@@ -1,0 +1,26 @@
+{
+  "name": "safepic",
+  "private": true,
+  "version": "1.0.0",
+  "description": "安全圖 (SafePic)",
+  "keywords": [],
+  "author": "",
+  "license": "BSD-3-Clause",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write .",
+    "postformat": "format-json-cli"
+  },
+  "devDependencies": {
+    "format-json-cli": "^0.1.2",
+    "prettier": "^2.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beenotung/safepic.git"
+  },
+  "bugs": {
+    "url": "https://github.com/beenotung/safepic/issues"
+  },
+  "homepage": "https://github.com/beenotung/safepic#readme"
+}

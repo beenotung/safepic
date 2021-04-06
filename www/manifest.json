@@ -3,11 +3,13 @@
   "short_name": "安全圖",
   "start_url": "index.html",
   "display": "standalone",
-  "icons": [{
-    "src": "assets/imgs/icon.png",
-    "sizes": "512x512",
-    "type": "image/png"
-  }],
+  "icons": [
+    {
+      "src": "assets/imgs/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
   "background_color": "#a37452",
   "theme_color": "#FFBE3B"
 }
