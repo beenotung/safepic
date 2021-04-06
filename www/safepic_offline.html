@@ -71,7 +71,12 @@
         onchange="updateTargetSize()"
       />
       <label for="unit">單位 (Unit)</label>
-      <input id="unit" type="text" value="MB" onchange="updateTargetSize()" />
+      <select id="unit" onchange="updateTargetSize()">
+        <option>B</option>
+        <option>KB</option>
+        <option selected>MB</option>
+        <option>GB</option>
+      </select>
       <label for="imageLoader"
         >選擇照片/拍攝照片 (Select Photos/Take Photo)</label
       >
