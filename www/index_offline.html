@@ -1,81 +1,74 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-	<head>
-		<meta charset="UTF-8">
-		<title>離線版安全圖 (SafePic)</title>
-		<meta name="viewport"
-			  content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<meta name="format-detection" content="telephone=no">
-		<meta name="msapplication-tap-highlight" content="no">
+  <head>
+    <meta charset="UTF-8" />
+    <title>離線版安全圖 (SafePic)</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
 
-		<!-- add to homescreen for ios -->
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- add to homescreen for ios -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
-		<style>
-			dd {
-				margin-top: 0.5em;
-			}
-			img {
-				max-width: 100%;
-				max-height: 100%;
-			}
-		</style>
-	</head>
-<body>
-	<noscript>
-		<em style="color: red;">Javascript is require for this webapp to work</em>
-	</noscript>
-	<h2 style="color:red;">
-		離線版
-	</h2>
-	<p>
-		安全圖 (SafePic)
-		是一個離線工具
-		。
-        所有數據均<strong>不會</strong>被我們儲存
-        。
-	</p>
-	
-	
-	<h2>
-		主要功能
-		(Major Functions):
-	</h2>
-	<ul>
-		<li>
-			去除相片資訊，保護上傳人匿名性
-			<br>
-			Remove metadata in photo, to protect anonymity of uploader
-		</li>
-		<li>
-			將圖像壓縮到1MB以下
-			<br>
-			Compress image into below 1MB
-		</li>
-	</ul>
-	<p>
-	<em>
-		您需要自擔風險使用它
-		。
-		Use it at your own risk.
-	</em>
-	</p>
+    <style>
+      dd {
+        margin-top: 0.5em;
+      }
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <em style="color: red">Javascript is require for this webapp to work</em>
+    </noscript>
+    <h2 style="color: red">離線版</h2>
+    <p>
+      安全圖 (SafePic) 是一個離線工具 。
+      所有數據均<strong>不會</strong>被我們儲存 。
+    </p>
 
-	<div id="core" style="outline: 1px red solid">
-	<label for="imageLoader" style="font-weight: bold">
-		選擇照片/拍攝照片
-		(Select Photos/Take Photo)
-		:
-	</label><br/>
-	<input type="file" accept="image/*" id="imageLoader" multiple onchange="handleInput()"/>
-	<button type="button" onclick="handleInput()">轉換</button>
-	<div id="output"></div>
-	</div>
+    <h2>主要功能 (Major Functions):</h2>
+    <ul>
+      <li>
+        去除相片資訊，保護上傳人匿名性
+        <br />
+        Remove metadata in photo, to protect anonymity of uploader
+      </li>
+      <li>
+        將圖像壓縮到1MB以下
+        <br />
+        Compress image into below 1MB
+      </li>
+    </ul>
+    <p>
+      <em> 您需要自擔風險使用它 。 Use it at your own risk. </em>
+    </p>
 
-	<div id="license">
-		<h2>授權條款 (BSD-3-Clause)</h2>
-		<pre style="white-space: pre-wrap">
+    <div id="core" style="outline: 1px red solid">
+      <label for="imageLoader" style="font-weight: bold">
+        選擇照片/拍攝照片 (Select Photos/Take Photo) : </label
+      ><br />
+      <input
+        type="file"
+        accept="image/*"
+        id="imageLoader"
+        multiple
+        onchange="handleInput()"
+      />
+      <button type="button" onclick="handleInput()">轉換</button>
+      <div id="output"></div>
+    </div>
+
+    <div id="license">
+      <h2>授權條款 (BSD-3-Clause)</h2>
+      <pre style="white-space: pre-wrap">
 * Copyright (c) 2019 著作權由__所有。著作權人保留一切權利。
 *
 * 這份授權條款，在使用者符合以下三條件的情形下，授予使用者使用及再散播本
@@ -97,84 +90,91 @@
 * 任何直接性、間接性、偶發性、特殊性、懲罰性或任何結果的損害（包括但不限
 * 於替代商品或勞務之購用、使用損失、資料損失、利益損失、業務中斷等等），
 * 不負任何責任，即在該種使用已獲事前告知可能會造成此類損害的情形下亦然。
-		</pre>
-	</div>
+		</pre
+      >
+    </div>
 
+    <script>
+      var body = document.getElementById('output');
+      var imageLoader = document.getElementById('imageLoader');
+      function handleInput() {
+        var i;
+        var file;
+        body.innerHTML = '';
+        var files = imageLoader.files;
+        for (i = 0; i < files.length; i++) {
+          file = files.item(i);
+          handleImage(file);
+        }
+      }
+      function handleImage(file) {
+        console.log(file);
+        var fName = file.name;
+        var fExt = fName.split('.').pop();
+        fName = fName.replace('.' + fExt, '_clean.' + fExt);
+        var fType = file.type;
+        var reader = new FileReader();
+        reader.onload = function () {
+          var img = new Image();
+          img.style.display = 'none';
+          img.onload = function () {
+            var link = document.createElement('a');
+            var canvas = document.createElement('canvas');
+            body.appendChild(link);
+            body.appendChild(canvas);
+            var ctx = canvas.getContext('2d');
+            body.appendChild(img);
 
-	<script>
-		var body = document.getElementById('output');
-		var imageLoader = document.getElementById('imageLoader');
-		function handleInput(){
-			var i;
-			var file;
-			body.innerHTML = '';
-			var files = imageLoader.files;
-			for (i = 0; i < files.length; i++) {
-				file = files.item(i);
-				handleImage(file)
-			}
-		}
-		function handleImage(file){
-			console.log(file);
-			var fName = file.name;
-			var fExt = fName.split('.').pop();
-			fName = fName.replace('.'+fExt, "_clean."+fExt);
-			var fType = file.type;
-			var reader = new FileReader();
-			reader.onload = function(){
-				var img = new Image();
-				img.style.display = 'none';
-				img.onload = function(){
-					var link = document.createElement('a');
-					var canvas = document.createElement("canvas");
-					body.appendChild(link);
-					body.appendChild(canvas);
-					var ctx = canvas.getContext('2d');
-					body.appendChild(img);
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0, img.width, img.height);
+            link.setAttribute('download', fName);
 
-					canvas.width = img.width;
-					canvas.height = img.height;
-					ctx.drawImage(img,0,0,img.width,img.height);
-					link.setAttribute('download', fName);
-
-					var blob = dataURItoBlob(canvas.toDataURL(fType));
-					console.log('original size:', Math.round(blob.size/1024/1024*100)/100,'MB');
-					var targetSize = 1024 * 1024;
-					while(blob.size > targetSize){
-						var ratio = Math.sqrt(targetSize/blob.size);
-						// ratio /= 1.37; // base64 factor
-						var new_width = Math.round(canvas.width * ratio);
-						var new_height = Math.round(canvas.height * ratio);
-						canvas.width = new_width;
-						canvas.height = new_height;
-						ctx.drawImage(img,0,0,new_width,new_height);
-						blob = dataURItoBlob(canvas.toDataURL(fType));
-						console.log('compressed size:', Math.round(blob.size/1024/1024*100)/100,'MB');
-					}
-					link.setAttribute('href', window.URL.createObjectURL(blob));
-					link.click();
-					console.log('ready:', fName);
-				};
-				img.src = reader.result;
-			};
-			reader.readAsDataURL(file);
-		}
-		function dataURItoBlob(dataURI) {
-			// convert base64/URLEncoded data component to raw binary data held in a string
-			var byteString;
-			if (dataURI.split(',')[0].indexOf('base64') >= 0)
-				byteString = atob(dataURI.split(',')[1]);
-			else
-				byteString = unescape(dataURI.split(',')[1]);
-			// separate out the mime component
-			var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-			// write the bytes of the string to a typed array
-			var ia = new Uint8Array(byteString.length);
-			for (var i = 0; i < byteString.length; i++) {
-				ia[i] = byteString.charCodeAt(i);
-			}
-			return new Blob([ia], {type:mimeString});
-		}
-	</script>
-</body>
+            var blob = dataURItoBlob(canvas.toDataURL(fType));
+            console.log(
+              'original size:',
+              Math.round((blob.size / 1024 / 1024) * 100) / 100,
+              'MB',
+            );
+            var targetSize = 1024 * 1024;
+            while (blob.size > targetSize) {
+              var ratio = Math.sqrt(targetSize / blob.size);
+              // ratio /= 1.37; // base64 factor
+              var new_width = Math.round(canvas.width * ratio);
+              var new_height = Math.round(canvas.height * ratio);
+              canvas.width = new_width;
+              canvas.height = new_height;
+              ctx.drawImage(img, 0, 0, new_width, new_height);
+              blob = dataURItoBlob(canvas.toDataURL(fType));
+              console.log(
+                'compressed size:',
+                Math.round((blob.size / 1024 / 1024) * 100) / 100,
+                'MB',
+              );
+            }
+            link.setAttribute('href', window.URL.createObjectURL(blob));
+            link.click();
+            console.log('ready:', fName);
+          };
+          img.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+      }
+      function dataURItoBlob(dataURI) {
+        // convert base64/URLEncoded data component to raw binary data held in a string
+        var byteString;
+        if (dataURI.split(',')[0].indexOf('base64') >= 0)
+          byteString = atob(dataURI.split(',')[1]);
+        else byteString = unescape(dataURI.split(',')[1]);
+        // separate out the mime component
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+        // write the bytes of the string to a typed array
+        var ia = new Uint8Array(byteString.length);
+        for (var i = 0; i < byteString.length; i++) {
+          ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ia], { type: mimeString });
+      }
+    </script>
+  </body>
 </html>
