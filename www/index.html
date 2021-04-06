@@ -202,8 +202,6 @@
             canvas.width = img.width;
             canvas.height = img.height;
             ctx.drawImage(img, 0, 0, img.width, img.height);
-            var link = document.createElement('a');
-            link.setAttribute('download', fName);
 
             var blob = dataURItoBlob(canvas.toDataURL(fType));
             console.log(
@@ -237,9 +235,12 @@
             img.src = objectURL;
             body.appendChild(img);
 
-            body.appendChild(link);
+            var link = document.createElement('a');
+            link.setAttribute('download', fName);
             link.setAttribute('href', objectURL);
+            body.appendChild(link);
             link.click();
+            console.log('ready:', fName);
           };
           img.src = reader.result;
         };
