@@ -87,6 +87,14 @@
         multiple
         onchange="handleInput()"
       />
+      <label for="size">檔案名稱後綴 (Suffix of filename)</label>
+      <input
+        id="suffix"
+        type="text"
+        value="_clean"
+        placeholder="(no suffix)"
+      />
+      <hr style="border-top: 1px"/>
       <button type="button" onclick="handleInput()">轉換 (Convert)</button>
       <button type="button" onclick="downloadAll()">
         全部下載 (Download All)
@@ -190,7 +198,7 @@
         console.log(file);
         var fNameParts = file.name.split('.');
         var fExt = fNameParts.pop();
-        var fName = fNameParts.pop() + '_clean';
+        var fName = fNameParts.pop() + suffix.value;
         fNameParts.push(fName);
         fNameParts.push(fExt);
         fName = fNameParts.join('.');
