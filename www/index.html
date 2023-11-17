@@ -92,6 +92,17 @@
         <option>MB</option>
         <option>GB</option>
       </select>
+      <label for="quality">圖像質量 (Image Quality)</label>
+      <input
+        id="quality"
+        type="number"
+        step="1"
+        min="1"
+        max="100"
+        value="80"
+      />
+      <div>有效範圍 (Effective Range): 1-100</div>
+      <div>建議 (Recommend): 50-80</div>
       <label for="imageLoader"
         >選擇照片/拍攝照片 (Select Photos/Take Photo)</label
       >
@@ -289,7 +300,7 @@
             canvas.height = img.height;
             ctx.drawImage(img, 0, 0, img.width, img.height);
 
-            var blob = dataURItoBlob(canvas.toDataURL(fType));
+            var blob = dataURItoBlob(canvas.toDataURL(fType, quality.valueAsNumber));
             console.log(
               'original size:',
               Math.round((blob.size / 1024 / 1024) * 100) / 100,
@@ -306,7 +317,7 @@
               canvas.width = new_width;
               canvas.height = new_height;
               ctx.drawImage(img, 0, 0, new_width, new_height);
-              blob = dataURItoBlob(canvas.toDataURL(fType));
+              blob = dataURItoBlob(canvas.toDataURL(fType, quality.valueAsNumber));
               console.log(
                 'compressed size:',
                 Math.round((blob.size / 1024 / 1024) * 100) / 100,
